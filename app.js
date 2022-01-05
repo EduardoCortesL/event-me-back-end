@@ -43,7 +43,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-
 // Connect DB
 mongoose.connect(
   process.env.MONGODB_URI, 
