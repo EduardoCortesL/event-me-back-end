@@ -5,11 +5,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require("mongoose");
 require('dotenv').config();
+const cors = require('cors');  
+
 
 
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var eventRouter = require('./routes/events');
 
 var app = express();
 
@@ -19,11 +22,13 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/events', eventRouter)
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
@@ -43,6 +48,7 @@ app.use(function(err, req, res, next) {
 });
 
 
+
 // Connect DB
 mongoose.connect(
   process.env.MONGODB_URI, 
@@ -51,6 +57,9 @@ mongoose.connect(
       useUnifiedTopology: true
   }
 );
+
+
+
 
 app.listen(4000, () => console.log("Server is running and connected to Database"));
 
