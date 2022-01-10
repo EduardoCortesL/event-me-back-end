@@ -3,11 +3,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var eventsSchema = new Schema ({
-    creatorId: {type: Schema.Types.ObjectId, ref: 'Users'},
-    name: {type: String, required: false},
+    creatorId: {type: String, required: false},
+    name: {type: String, required: true},
     date: {type: Date, required: true},
     end: {type: Date, required: true},
-    location: {type: String, required: false},
+    location: {type: String, required: true},
     guest: {type: [], required: false}
 }, {
     timestamps: true,

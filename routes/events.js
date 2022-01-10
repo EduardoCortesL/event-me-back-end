@@ -29,4 +29,19 @@ router.route('/add').post((req, res) => {
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/:email').get((req,res) => {
+  let email = req.params.email;
+  Event.find({creatorId: email})
+    .then(events => res.json(events))
+    .catch(err => res.status(400).json('Error:' + err));
+});
+
+/*
+router.route('/:id').get((req,res) => {
+  let id = req.params.id;
+  Event.findById(id)
+  .then(events => res.json(events))
+  .catch(err => res.status(400).json('Error:' + err));
+})*/
+
 module.exports = router;
